@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(path = "tasks", collectionResourceRel = "tasks")
-public interface TaskRestRepository  extends JpaRepository<Task, Long> {
+public interface TaskRestRepository extends JpaRepository<Task, Long> {
 
 }
