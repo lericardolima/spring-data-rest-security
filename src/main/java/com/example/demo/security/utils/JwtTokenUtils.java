@@ -48,16 +48,6 @@ public class JwtTokenUtils {
         return expiration;
     }
 
-    public String refreshToken(String token) {
-        Optional<Claims> claims = getClaimsFromToken(token);
-        if (claims.isPresent()) {
-            claims.get().put(CLAIM_KEY_CREATED, fromLocalDateTime(LocalDateTime.now()));
-            return generateToken(claims.get());
-        }
-
-        return null;
-    }
-
     public Boolean isValidToken(String token) {
         return !isExpiredToken(token);
     }
