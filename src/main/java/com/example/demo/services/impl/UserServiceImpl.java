@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.exceptions.EmailAlreadyInUseException;
 import com.example.demo.exceptions.UsernameAlreadyInUseException;
 import com.example.demo.models.User;
 import com.example.demo.repositories.UserRepository;
@@ -28,12 +29,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(User user) throws UsernameAlreadyInUseException {
+    public User save(User user) throws UsernameAlreadyInUseException, EmailAlreadyInUseException {
 
         Optional<User> userWithSameUsername = userRepository.findById(user.getUsername());
         if (userWithSameUsername.isPresent()) {
             throw new UsernameAlreadyInUseException(user.getUsername());
         }
+
+        Optional<User> userWithSameEmail = userRepository.findByEmail(user.getEmail());
+        if (userWithSameEmail.isPresent()) {
+            throw new EmailAlreadyInUseException(user.getEmail());
+        }
+
         return userRepository.save(user);
     }
 }

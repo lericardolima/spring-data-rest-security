@@ -18,6 +18,9 @@ public class User {
     @Column(nullable = false)
     private RoleType role;
 
+    @Column(nullable = false, unique = true, updatable = false)
+    private String email;
+
     public String getUsername() {
         return username;
     }
@@ -41,4 +44,13 @@ public class User {
     public void setRole(RoleType role) {
         this.role = role;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }
